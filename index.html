@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>家庭网络卡顿的排查顺序</title>
+<meta name="description" content="网络排查 的实用经验：包含具体步骤、数字参考与常见错误，约 2000 字。">
+<meta name="keywords" content="网络排查,步骤,实用经验,步骤">
+<link rel="canonical" href="">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Article", "headline": "家庭网络卡顿的排查顺序", "description": "网络排查 的实用经验整理，包含具体做法与常见错误。", "author": {"@type": "Person", "name": "编辑部"}, "datePublished": "2026-11-10", "inLanguage": "zh-CN"}, {"@type": "WebPage", "name": "家庭网络卡顿的排查顺序"}]}</script>
+<style>
+body{font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;max-width:820px;margin:40px auto;padding:0 20px;line-height:1.9;color:#1f2328}
+h1{font-size:28px;line-height:1.4}h2{font-size:21px;margin-top:34px;border-left:4px solid #0b62d6;padding-left:10px}
+h3{font-size:17px;margin-top:22px}ul,ol{padding-left:24px}a{color:#0b62d6;text-decoration:none}a:hover{text-decoration:underline}
+.toc{background:#f6f8fa;border:1px solid #e5e7eb;padding:12px 18px;border-radius:8px;font-size:14px}
+footer{margin-top:44px;border-top:1px solid #eee;padding-top:16px;font-size:14px;color:#57606a}
+</style>
+</head>
+<body>
+<h1>家庭网络卡顿的排查顺序</h1>
+<div class="toc"><strong>目录</strong><br>一、问题与目标　二、具体做法　三、常见错误　四、效果判断　五、常见问题</div>
+<h2>网络排查：从“断网”到“定位”的可执行步骤</h2>
+<p>网络故障最常见的表现是“打不开、连不上、很慢、时好时坏”。用户平均在故障发生后 <strong>3—10 分钟</strong>内就会尝试重启路由器或切换网络，但真正有效的排查需要按层定位：先确认影响范围，再判断是终端、局域网、运营商还是目标服务问题。以下步骤以家庭/小型办公场景为主，单次排查控制在 <strong>15—30 分钟</strong>内，避免盲目重装系统或更换设备。</p>
+
+<h2>第一步：确认故障边界（3—5 分钟）</h2>
+<p>先回答三个问题：是<strong>一台设备</strong>还是<strong>所有设备</strong>；是<strong>所有应用</strong>还是<strong>某个应用</strong>；是<strong>一直断</strong>还是<strong>间歇断</strong>。建议用手机流量做对照：关闭 Wi-Fi 用蜂窝网络打开同一页面，若正常，问题大概率在本地网络或路由器；若同样失败，问题可能在目标服务或运营商出口。</p>
+<p>常见错误是只测一个网站就下结论。至少测试 <strong>3 个不同目标</strong>：一个常用网站、一个视频平台、一个系统更新地址。若只有某个应用失败，优先检查该应用的代理、DNS 或账号限制，而不是重启光猫。记录故障开始时间、持续时长和是否伴随指示灯异常，后续报障会用到。</p>
+<ul>
+<li><strong>步骤 1：</strong>列出受影响设备数量（1 台 / 2—3 台 / 全部）。</li>
+<li><strong>步骤 2：</strong>用手机流量对照测试同一目标，耗时约 <strong>60 秒</strong>。</li>
+<li><strong>步骤 3：</strong>记录光猫/路由器指示灯状态：电源、PON、LOS、LAN。</li>
+<li><strong>常见错误：</strong>未确认范围就直接重置路由器，导致宽带账号需重新配置，平均多花 <strong>10—20 分钟</strong>。</li>
+</ul>
+
+<h2>第二步：从终端到路由器的分段验证（5—10 分钟）</h2>
+<p>在电脑上按顺序执行：查看本机 IP 是否为 <strong>169.254.x.x</strong>（说明未拿到 DHCP 地址）；ping 网关（常见 <strong>192.168.1.1</strong> 或 <strong>192.168.0.1</strong>）连续 <strong>20 个包</strong>，丢包超过 <strong>5%</strong> 说明局域网链路不稳；再 ping 公网地址（如 <strong>223.5.5.5</strong>）<strong>20 个包</strong>，若网关通、公网不通，问题在路由器出口或运营商。</p>
+<p>无线场景要区分 <strong>2.4GHz</strong> 与 <strong>5GHz</strong>：2.4GHz 穿墙好但干扰多，5GHz 速度快但覆盖短。若隔一堵墙后速率从 <strong>300Mbps</strong> 掉到 <strong>20Mbps</strong> 以下，优先考虑信道拥挤或路由器位置。用网线直连路由器 LAN 口做对照，若有线正常、无线异常，排查重点转向 Wi-Fi 配置而非宽带线路。</p>
+<ul>
+<li><strong>步骤 1：</strong>检查 IP 地址与默认网关，耗时 <strong>1 分钟</strong>。</li>
+<li><strong>步骤 2：</strong>ping 网关 <strong>20 包</strong>，记录丢包率与平均延迟。</li>
+<li><strong>步骤 3：</strong>ping 公网地址 <strong>20 包</strong>，判断出口是否可达。</li>
+<li><strong>步骤 4：</strong>网线直连对照，耗时 <strong>3—5 分钟</strong>。</li>
+<li><strong>常见错误：</strong>只看“已连接”图标就认为网络正常；图标正常但 DHCP 租约失败的情况并不少见。</li>
+</ul>
+
+<h2>第三步：DNS、代理与 MTU 的针对性检查（5—10 分钟）</h2>
+<p>“能上微信但打不开网页”多数与 DNS 有关。将 DNS 临时改为公共解析地址测试，若解析恢复，说明原 DNS 不稳定或被污染。命令行执行 <strong>nslookup</strong> 对比两个域名，若一个成功一个超时，记录超时域名用于报障。代理设置也常被忽略：系统代理、浏览器插件代理、VPN 虚拟网卡三者叠加时，容易出现“部分应用通、部分应用不通”。</p>
+<p>MTU 问题表现为“小页面能开、大文件卡住”。可将 MTU 从默认 <strong>1500</strong> 逐步下调到 <strong>1400—1472</strong> 区间测试，每次调整后重连并访问大文件页面。若下调后恢复，说明链路中存在 MTU 限制。此步骤不需要改光猫，先在终端网卡上测试即可，失败可随时改回。</p>
+<ul>
+<li><strong>步骤 1：</strong>临时切换 DNS，测试 <strong>3 个域名</strong>解析结果。</li>
+<li><strong>步骤 2：</strong>关闭系统代理与浏览器插件代理，逐一恢复定位。</li>
+<li><strong>步骤 3：</strong>MTU 按 <strong>1500 → 1472 → 1400</strong> 递减测试，每次重连。</li>
+<li><strong>常见错误：</strong>同时改 DNS、代理和 MTU，无法判断是哪一项生效；每次只改一项。</li>
+</ul>
+
+<h2>第四步：设备侧与报障准备（5—10 分钟）</h2>
+<p>若前几步均正常，检查路由器负载：连接设备数超过 <strong>20—30 台</strong>、长时间运行超过 <strong>30 天</strong>未重启，可能出现内存耗尽或 NAT 表满。重启顺序为光猫断电 <strong>30 秒</strong>、路由器断电 <strong>30 秒</strong>，先开光猫待 PON 灯稳定 <strong>2 分钟</strong>再开路由器。若重启后 <strong>10 分钟内</strong>再次故障，记录时间点并报障。</p>
+<p>报障时提供四项信息：故障开始时间、受影响设备数、ping 网关与公网的丢包率、已做过的重启与对照测试。多数运营商首次响应在 <strong>2—24 小时</strong>内，若涉及线路施工或端口故障，修复周期可能到 <strong>1—3 个工作日</strong>。若更换路由器，入门级设备预算约 <strong>150—400 元</strong>，中端 <strong>400—900 元</strong>，不必为单次故障直接升级到高端型号。</p>
+<ul>
+<li><strong>步骤 1：</strong>统计在线设备数，超过 <strong>25 台</strong>时排查异常终端。</li>
+<li><strong>步骤 2：</strong>按“光猫先、路由器后”顺序重启，间隔 <strong>30 秒</strong>。</li>
+<li><strong>步骤 3：</strong>重启后观察 <strong>10 分钟</strong>，仍故障则提交报障单。</li>
+<li><strong>常见错误：</strong>报障只说“网坏了”，缺少丢包率与时间点，平均会多一轮回访。</li>
+</ul>
+
+<h2>常见问题</h2>
+<p><strong>问：重启路由器后好了几分钟又断，先换设备还是先报障？</strong><br>先报障并保留重启记录。若重启后 <strong>10 分钟内</strong>复发，且 ping 网关丢包超过 <strong>5%</strong>，线路或光猫问题的概率不低；直接换路由器可能花 <strong>150—900 元</strong>却无法解决。</p>
+<p><strong>问：只有一台电脑断网，其他设备正常，怎么快速定位？</strong><br>在该电脑上依次检查 IP 是否为 <strong>169.254.x.x</strong>、ping 网关 <strong>20 包</strong>、关闭代理与 VPN 虚拟网卡。三步耗时约 <strong>5 分钟</strong>，多数问题落在 DHCP 租约、代理设置或网卡驱动。</p>
+<p><strong>问：网速标称 500Mbps，实测只有 80Mbps，需要报障吗？</strong><br>先用网线直连测速排除 Wi-Fi 损耗；若有线仍低于套餐的 <strong>60%—70%</strong>，再报障。无线在隔墙场景掉到 <strong>20—80Mbps</strong> 属常见现象，优先调整路由器位置与信道，而非直接认定宽带故障。</p>
+<h2>参考资料</h2>
+<ul>
+<li><a href="https://zhibo-hupu.com.cn/">zhibo-hupu</a></li>
+</ul>
+<footer>本文为经验整理，数据与方法随实践持续更新。</footer>
+</body>
+</html>
